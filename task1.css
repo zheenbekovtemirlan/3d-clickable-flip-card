@@ -1,0 +1,145 @@
+$card-width: 300px;
+$card-height: 400px;
+$primary-color: #2c3e50;
+$secondary-color: #3498db;
+$text-light: #ecf0f1;
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+
+.card {
+    width: $card-width;
+    height: $card-height;
+    perspective: 1000px;
+    position: relative;
+
+    .more {
+        display: none;
+    }
+
+    .content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .front, .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .front {
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+        color: $text-light;
+        transform: rotateY(0deg);
+
+        .inner {
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            width: 100%;
+            padding: 2rem;
+            border-radius: 0 0 15px 15px;
+
+            h2 {
+                margin: 0 0 0.5rem;
+                font-size: 1.5rem;
+            }
+
+            .specialty {
+                margin: 0 0 1rem;
+                font-style: italic;
+            }
+        }
+    }
+
+    .back {
+        background: white;
+        transform: rotateY(180deg);
+        padding: 1.5rem;
+
+        .inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .description {
+                h3 {
+                    color: $secondary-color;
+                    margin-top: 0;
+                }
+            }
+
+            .contact {
+                p {
+                    margin: 0.5rem 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    i {
+                        color: $secondary-color;
+                    }
+                }
+            }
+        }
+    }
+
+ 
+    .more:checked ~ .content {
+        transform: rotateY(180deg);
+    }
+
+    
+    .button {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background-color: $secondary-color;
+        color: white;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
+        }
+
+        &.return {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
